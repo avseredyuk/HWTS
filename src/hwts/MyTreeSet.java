@@ -75,14 +75,26 @@ public class MyTreeSet {
                         localRoot.left.parent = localRoot.parent;
                         
                     }
-                    
                 } 
             } else {
-                
                 // both childrens are present
-                
-                
-                
+                // look for right->left
+                Node lookForLeft = localRoot.right;
+                if(lookForLeft.left != null){
+                    //right->!null
+                    do {
+                        lookForLeft = lookForLeft.left;
+                    } while (lookForLeft.left != null);
+                    // replcae int with what we've found
+                    localRoot.value = lookForLeft.value;
+                    // kill obj thaat we've found
+                    lookForLeft.parent.left = null;
+                } else {
+                    // looking for 15
+                    Node tmpNode = localRoot.left;
+                    localRoot.parent.right = lookForLeft;
+                    lookForLeft.left = tmpNode;
+                }
             }
         }
     }
